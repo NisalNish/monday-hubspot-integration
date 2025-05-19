@@ -12,15 +12,15 @@ router.post('/', jwtAuth, async (req, res) => {
   const amount = parseFloat(deal.amount);
 
   if (!dealName || isNaN(amount)) {
-    return res.status(400).json({ error: '❌ Invalid payload' });
+    return res.status(400).json({ error: ' Invalid payload' });
   }
 
   try {
     const boardId = await createBoard(dealName, amount);
     res.status(200).json({ message: '✅ Board created from webhook', boardId });
   } catch (err) {
-    console.error('❌ Webhook error:', err.message);
-    res.status(500).json({ error: '❌ Failed to process webhook' });
+    console.error('Webhook error:', err.message);
+    res.status(500).json({ error: ' Failed to process webhook' });
   }
 });
 

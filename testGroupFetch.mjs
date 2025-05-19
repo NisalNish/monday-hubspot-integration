@@ -23,16 +23,16 @@ const getGroupsQuery = gql`
   }
 `;
 
-const boardId = 'YOUR_BOARD_ID_HERE'; // replace with actual board ID
+const boardId = '9177096169'; 
 
 async function testGroupFetch() {
   console.log(`🔍 Fetching groups for board ID: ${boardId}`);
   try {
     const res = await client.request(getGroupsQuery, { boardId });
     const groups = res.boards?.[0]?.groups || [];
-    console.log('✅ Groups:', groups);
+    console.log(' Groups:', groups);
   } catch (err) {
-    console.error('❌ Error fetching groups:');
+    console.error(' Error fetching groups:');
     if (err.response) {
       console.error(JSON.stringify(err.response, null, 2));
     } else {

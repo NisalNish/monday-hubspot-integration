@@ -11,7 +11,7 @@ router.get('/', jwtAuth, async (req, res) => {
     const report = await getETLReport();
     res.status(200).json({ success: true, data: report });
   } catch (err) {
-    console.error('❌ ETL Report Error:', err.message);
+    console.error(' ETL Report Error:', err.message);
     res.status(500).json({ success: false, error: 'Failed to generate report' });
   }
 });

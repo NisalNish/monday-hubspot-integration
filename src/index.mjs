@@ -20,15 +20,15 @@ app.post('/hubspot/deal', jwtAuth, async (req, res) => {
   const { dealName, amount } = req.body;
 
   if (!dealName || !amount) {
-    return res.status(400).json({ error: '❌ Missing dealName or amount' });
+    return res.status(400).json({ error: ' Missing dealName or amount' });
   }
 
   try {
     const boardId = await createBoard(dealName, amount);
-    res.status(200).json({ message: '✅ Board created successfully', boardId });
+    res.status(200).json({ message: ' Board created successfully', boardId });
   } catch (err) {
-    console.error('❌ Error creating board:', err.message);
-    res.status(500).json({ error: '❌ Failed to create board', details: err.message });
+    console.error(' Error creating board:', err.message);
+    res.status(500).json({ error: ' Failed to create board', details: err.message });
   }
 });
 
@@ -39,5 +39,5 @@ app.use('/report', jwtAuth, reportRoutes); // ✅ Protected report route
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(` Server is running on http://localhost:${PORT}`);
 });

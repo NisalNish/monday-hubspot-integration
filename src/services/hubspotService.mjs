@@ -10,7 +10,7 @@ export async function fetchDeals(accessToken) {
     });
     return response.data;
   } catch (err) {
-    console.error('❌ Error fetching deals:', err.response?.data || err.message);
+    console.error('Error fetching deals:', err.response?.data || err.message);
     throw err;
   }
 }

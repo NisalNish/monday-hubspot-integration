@@ -66,9 +66,9 @@ const tasksBySize = {
 async function validateToken() {
   try {
     const res = await client.request(validateTokenQuery);
-    console.log('✅ Token is valid. Sample board:', res.boards?.[0]?.name || 'N/A');
+    console.log(' Token is valid. Sample board:', res.boards?.[0]?.name || 'N/A');
   } catch (err) {
-    console.error('❌ Invalid token or Monday API error:', err.message);
+    console.error(' Invalid token or Monday API error:', err.message);
     throw err;
   }
 }
@@ -79,7 +79,7 @@ async function waitForGroups(boardId, retries = 10, delay = 2000) {
       const res = await client.request(getGroupsQuery, { boardId });
       const groups = res.boards?.[0]?.groups;
       if (groups?.length > 0) {
-        console.log(`✅ Groups retrieved:`, groups);
+        console.log(` Groups retrieved:`, groups);
         return groups[0].id;
       }
       console.log(`No groups found yet. Retrying (${i + 1}/${retries})...`);
@@ -88,7 +88,7 @@ async function waitForGroups(boardId, retries = 10, delay = 2000) {
     }
     await sleep(delay);
   }
-  throw new Error('❌ Failed to retrieve groups after multiple attempts.');
+  throw new Error(' Failed to retrieve groups after multiple attempts.');
 }
 
 async function createBoard(dealName, amount) {
@@ -97,7 +97,7 @@ async function createBoard(dealName, amount) {
 
     const boardRes = await client.request(createBoardMutation, { boardName: dealName });
     const boardId = boardRes.create_board.id;
-    console.log('✅ Board created:', boardId);
+    console.log(' Board created:', boardId);
 
     const groupId = await waitForGroups(boardId);
     const dealSize = getDealSizeCategory(amount);
@@ -108,12 +108,12 @@ async function createBoard(dealName, amount) {
         itemName: taskName,
         groupId
       });
-      console.log(`✅ Created item: ${taskName}`);
+      console.log(` Created item: ${taskName}`);
     }
 
     return boardId;
   } catch (err) {
-    console.error('❌ Monday API Error:', err.message);
+    console.error(' Monday API Error:', err.message);
     throw new Error('Failed to create board');
   }
 }
