@@ -1,19 +1,14 @@
-// src/routes/report.mjs
-import express from 'express';
-import jwtAuth from '../middlewares/authMiddleware.mjs';
-import { getETLReport } from '../services/etlService.mjs';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const router = express.Router();
+dotenv.config();
 
-// JWT-protected route to fetch ETL report data
-router.get('/', jwtAuth, async (req, res) => {
-  try {
-    const report = await getETLReport();
-    res.status(200).json({ success: true, data: report });
-  } catch (err) {
-    console.error(' ETL Report Error:', err.message);
-    res.status(500).json({ success: false, error: 'Failed to generate report' });
-  }
-});
+const payload = { user: 'demo-user' };
+const secret = process.env.JWT_SECRET;
+const options = { expiresIn: '1h' };
 
-export default router;
+const token = jwt.sign(payload, secret, options);
+
+console.log(' Generated JWT:\n');
+console.log(token);
+console.log(' Copy and use this token in your curl requests.\n');
